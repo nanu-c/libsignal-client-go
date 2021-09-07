@@ -86,8 +86,24 @@ typedef struct SignalDecryptionErrorMessage SignalDecryptionErrorMessage;
 typedef struct SignalFingerprint SignalFingerprint;
 
 typedef struct SignalPlaintextContent SignalPlaintextContent;
+typedef struct SignalPublicKey{
+  uint8_t *key;
+} SignalPublicKey;
 
-typedef struct SignalPreKeyBundle SignalPreKeyBundle;
+typedef struct SignalIdentityKey{
+  SignalPublicKey public_key;
+} SignalIdentityKey;
+
+typedef struct SignalPreKeyBundle{
+  u_int32_t registration_id;
+  u_int32_t device_id;
+  u_int32_t  pre_key_id;
+  SignalPublicKey pre_key_public;
+  u_int32_t signed_pre_key_id;
+  SignalPublicKey signed_pre_key_public;
+  u_long *signed_pre_key_signature;
+  SignalIdentityKey identity_key_id;
+} SignalPreKeyBundle;
 
 typedef struct SignalPreKeyRecord SignalPreKeyRecord;
 
@@ -102,7 +118,10 @@ typedef struct SignalProtocolAddress SignalProtocolAddress;
 
 typedef struct SignalPublicKey SignalPublicKey;
 
-typedef struct SignalSenderCertificate SignalSenderCertificate;
+typedef struct SignalSenderCertificate{
+  unsigned char *certificate;
+  unsigned char *signature;
+}  SignalSenderCertificate;
 
 typedef struct SignalSenderKeyDistributionMessage SignalSenderKeyDistributionMessage;
 
